@@ -1,10 +1,6 @@
 node {
  sh 'echo HelloWorld'
 
- parameters {
-         string(defaultValue: "JenkinsSample/", description: '', name: 'xcodeProjectPath')
- }
-
  stage('Checkout') {
         // Checkout files.
         checkout([
@@ -29,8 +25,9 @@ node {
    sh 'xcodebuild -scheme "JenkinsSample" -configuration "Debug" test -destination "platform=iOS Simulator,name=iPhone 7,OS=10.1"'
    }
 
-   stage ('Notify') {
-       // Notify completion
-   sh 'echo Notify if needed completed'
-   }
+   post {
+        always {
+            emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
+        }
+    }
 }
