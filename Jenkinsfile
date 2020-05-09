@@ -28,7 +28,8 @@ node {
 
    stage ('Notify') {
        // Notify completion
-   sh 'echo Notify if needed completed'
-   emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
+   mail to: 'kaushik22888@hotmail.com',
+             subject: "Success Pipeline:",
+             body: "Something is wrong"
    }
 }
