@@ -1,4 +1,5 @@
-node {
+pipeline {
+agent any
  sh 'echo HelloWorld'
 
  stage('Checkout') {
@@ -23,6 +24,11 @@ node {
    stage('Test') {
    // Test
    sh 'xcodebuild -scheme "JenkinsSample" -configuration "Debug" test -destination "platform=iOS Simulator,name=iPhone 7,OS=10.1"'
+   }
+
+   stage ('Notify') {
+       // Notify completion
+   sh 'echo Notify if needed completed'
    }
 
    post {
