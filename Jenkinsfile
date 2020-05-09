@@ -1,5 +1,5 @@
-pipeline {
-agent any
+node {
+
  sh 'echo HelloWorld'
 
  stage('Checkout') {
